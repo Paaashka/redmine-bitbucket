@@ -18,9 +18,8 @@ class BitbucketHookController < ApplicationController
     raise TypeError, "Project '#{identifier}' has no repository" if repository.nil?
     raise TypeError, "Repository for project '#{identifier}' is not a Mercurial repository" unless repository.is_a?(Repository::Mercurial)
 
-    # Get updates from the Github repository
-    #command = "cd '#{repository.url}' && cd .. && git pull --rebase"
-    command = "cd '#{repository.url}' && hg pull"
+    # Get updates from the bitbucket repository
+    command = "cd \"#{repository.url}\" && hg pull"
     exec(command)
 
     # Fetch the new changesets into Redmine
